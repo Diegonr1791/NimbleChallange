@@ -4,20 +4,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/header/Header";
 import Navbar from "../components/Navbar/Navbar";
 
-const HomepageMovies = lazy(() => import("../pages/HomeMovies"));
-const CategoriesMovies = lazy(() => import("../pages/CategoriesMovies"));
-const DetailsMovie = lazy(() => import("../pages/DetailsMovie"));
+const HomepageMovies = lazy(() => import("../pages/Home/HomeMovies"));
+const CategoriesMovies = lazy(() => import("../pages/Movies/CategoriesMovies"));
+const DetailsMovie = lazy(() => import("../pages/Movies/DetailsMovie"));
 
 const Router = () => {
   return (
     <BrowserRouter basename="">
-      <Flex flexDir="column" flex="1" >
+      <Flex flexDir="column" flex="1">
         <Header />
         <Flex flex="1">
           <Navbar />
           <Routes>
             <Route path="/" element={<HomepageMovies />} />
-            <Route path="/Home" element={<HomepageMovies />} />
+            <Route path="/Home" index element={<HomepageMovies />} />
             <Route path="/Categories" element={<CategoriesMovies />} />
             <Route path="/Details" element={<DetailsMovie />} />
           </Routes>

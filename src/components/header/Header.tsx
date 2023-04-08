@@ -5,7 +5,7 @@ const Header = () => {
     <Grid >
       <Flex alignItems="center" h="84px" >
         <Box w="20" />
-        <Heading>Catuvies</Heading>
+        <Heading>Catoovies</Heading>
         <Box ml="auto" mr="30px" alignItems="center">
           <Text>Perfil</Text>
         </Box>

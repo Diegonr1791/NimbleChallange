@@ -3,9 +3,9 @@ import { itemsNavbar } from "./items";
 
 const Navbar = () => {
   return (
-    <Flex flexDir="column">
+    <Flex bgColor="red">
       {itemsNavbar.map((item, index) => {
-        return <Link key={index}>{item}</Link>;
+        return <Link key={index} p={3} href="/Home">{item}</Link>;
       })}
     </Flex>
   );
