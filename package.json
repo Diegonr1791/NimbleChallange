@@ -13,11 +13,13 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@types/node": "^18.15.11",
+    "dayjs": "^1.11.7",
     "framer-motion": "^10.9.1",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
+    "styled-components": "^5.3.9",
     "vite-tsconfig-paths": "^4.0.7"
   },
   "devDependencies": {

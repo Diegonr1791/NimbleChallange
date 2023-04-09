@@ -1,5 +1,6 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { itemsNavbar } from "./items";
+import { originalColors } from "@/theme/palette";
 
 const Navbar = () => {
   return (
@@ -7,7 +8,7 @@ const Navbar = () => {
       <Box>
         {itemsNavbar.map((item, index) => {
           return (
-            <Link key={index} p={3} href="/Home">
+            <Link key={index} p={3} href="/Home" color={originalColors.white}>
               {item}
             </Link>
           );
