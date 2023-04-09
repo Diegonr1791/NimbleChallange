@@ -17,8 +17,10 @@ const CardPopulars = ({
   description,
   banner,
 }: TCardPopularsProps) => {
+    console.log('entra card');
+    
   return (
-    <Card flex={1} h="md" borderRadius="none">
+    <Card h="md" borderRadius="none">
       <CardBody bgImage={banner} bgSize="cover">
         <Stack flex={1} h="100%" justifyContent="flex-end">
           <Box bgColor="rgba(0, 0, 0, .6)" width="500px" p={3} borderRadius={2}>

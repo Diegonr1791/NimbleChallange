@@ -9,7 +9,6 @@ type ApiItemData = {
   popularity: number;
   posterPath: string;
   releaseDate: string;
-  year: string;
   title: string;
   voteAverage: number;
   voteCount: number;
@@ -29,7 +28,6 @@ export const formatPopularsMovies = (data: any) => {
       popularity: item?.popularity,
       posterPath: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
       releaseDate: item?.release_date,
-      year: getYear(item?.release_date),
       title: item?.title,
       voteAverage: item?.vote_average,
       voteCount: item?.vote_count,
