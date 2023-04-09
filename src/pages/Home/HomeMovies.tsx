@@ -1,14 +1,12 @@
-import React from "react";
-import Loading from "../../components/Loading";
 import getPoulars from "../../services/movies/getPopulars";
+import { Flex } from "@chakra-ui/layout";
 
 const HomeMovies = () => {
   getPoulars();
   return (
-    <div>
-      <Loading />
+    <Flex bgColor="aliceblue" flex={1}>
       HomeMovies
-    </div>
+    </Flex>
   );
 };
 

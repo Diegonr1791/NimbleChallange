@@ -14,7 +14,6 @@ const Router = () => {
       <Flex flexDir="column" flex="1">
         <Header />
         <Flex flex="1">
-          <Navbar />
           <Routes>
             <Route path="/" element={<HomepageMovies />} />
             <Route path="/Home" index element={<HomepageMovies />} />
