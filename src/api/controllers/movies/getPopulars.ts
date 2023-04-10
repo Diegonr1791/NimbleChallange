@@ -5,7 +5,8 @@ const popularMoviesApi = `${API_MOVIE}/3/movie/popular?api_key=${THEMOVIEDB_APIK
 const headers = {
   "Content-Type": "application/json",
 };
-const getPopulars = async () => {
+
+export const getAllPopulars = async () => {
   const response = await fetch(popularMoviesApi, { headers });
   if (response.ok) {
     const data = await response.json();
@@ -15,4 +16,14 @@ const getPopulars = async () => {
   }
   return [];
 };
-export default getPopulars;
+
+export const getFirstPopulars = async () => {
+  const response = await fetch(popularMoviesApi, { headers });
+  if (response.ok) {
+    const data = await response.json();
+    const formatedData = formatPopularsMovies(data).slice(0, 4);
+
+    return formatedData;
+  }
+  return [];
+};

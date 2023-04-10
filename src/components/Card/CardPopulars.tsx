@@ -17,8 +17,6 @@ const CardPopulars = ({
   description,
   banner,
 }: TCardPopularsProps) => {
-    console.log('entra card');
-    
   return (
     <Card h="md" borderRadius="none">
       <CardBody bgImage={banner} bgSize="cover">

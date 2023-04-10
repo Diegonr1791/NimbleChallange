@@ -28,7 +28,14 @@ const MultiCarousel = ({ data }: MulticarouselProps) => {
 
   return (
     <Grid flex={1}>
-      <Carousel responsive={responsive}>
+      <Carousel
+        responsive={responsive}
+        arrows={false}
+        showDots
+        slidesToSlide={1}
+        renderDotsOutside
+        infinite
+      >
         {data.map((movie, index: number) => {
           return (
             <CardPopulars
