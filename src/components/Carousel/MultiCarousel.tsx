@@ -1,10 +1,9 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import CardPopulars from "@/components/Card/CardPopulars";
-import { Grid, Stack, Text, Flex } from "@chakra-ui/react";
+import CardBanner from "@/components/Card/CardBanner";
+import { Grid } from "@chakra-ui/react";
 import { TApiData } from "@/api/controllers/movies/adapters/formatPopularsMovies";
 import { getYear } from "@/utils/date";
-import { log } from "console";
 
 type MulticarouselProps = {
   data: TApiData;
@@ -33,12 +32,12 @@ const MultiCarousel = ({ data }: MulticarouselProps) => {
         arrows={false}
         showDots
         slidesToSlide={1}
-        renderDotsOutside
         infinite
+        autoPlay
       >
         {data.map((movie, index: number) => {
           return (
-            <CardPopulars
+            <CardBanner
               key={index}
               idMovie={movie.id}
               title={movie?.title}

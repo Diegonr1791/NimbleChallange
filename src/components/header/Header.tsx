@@ -4,13 +4,12 @@ import { originalColors } from "@/theme/palette";
 
 const Header = () => {
   return (
-    <Grid >
-      <Flex flex={1}>
+    <Grid>
+      <Flex flex={1} py={2}>
         <Box w="20" />
         <Heading color={originalColors.white}>NimbleMovies</Heading>
-        <Navbar/>
+        <Navbar />
       </Flex>
-      <Divider />
     </Grid>
   );
 };

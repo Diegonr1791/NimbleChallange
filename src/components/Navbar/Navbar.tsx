@@ -1,8 +1,12 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { itemsNavbar } from "./items";
 import { originalColors } from "@/theme/palette";
+import SearchInput from "../Imput/SearchImput/SearchInput";
 
 const Navbar = () => {
+  const onChangeSearch = (search: string) => {
+    console.log("search");
+  };
   return (
     <Flex flex={1} alignItems="center" pl={5}>
       <Box>
@@ -14,8 +18,8 @@ const Navbar = () => {
           );
         })}
       </Box>
-      <Box ml="auto" mr="30px" alignItems="center">
-        <Text>Profile</Text>
+      <Box ml="auto" mr="20px" alignItems="center">
+        <SearchInput setValue={onChangeSearch} />
       </Box>
     </Flex>
   );
