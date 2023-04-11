@@ -19,7 +19,7 @@ const CardPopulars = ({
 }: TCardPopularsProps) => {
   return (
     <Card h="md" borderRadius="none">
-      <CardBody bgImage={banner} bgSize="cover">
+      <CardBody bgImage={banner} bgSize="cover" bgRepeat="no-repeat">
         <Stack flex={1} h="100%" justifyContent="flex-end">
           <Box bgColor="rgba(0, 0, 0, .6)" width="500px" p={3} borderRadius={2}>
             <Heading size="md" color={originalColors.white}>

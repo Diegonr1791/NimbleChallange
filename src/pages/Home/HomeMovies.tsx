@@ -4,6 +4,7 @@ import { Grid, Flex, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import getPopulars from "@/api/controllers/movies/getPopulars";
 import PopularMoviesList from "@/components/PopularMoviesList/PopularMoviesList";
+import { getRandomElements } from "@/utils/getRandomElements";
 
 const HomeMovies = () => {
   const [movies, setMovies] = useState<TApiData>([]);
@@ -18,7 +19,7 @@ const HomeMovies = () => {
 
   return (
     <Box flex={1}>
-      <MultiCarousel data={movies.slice(0, 4)} />
+      <MultiCarousel data={getRandomElements(movies, 4)} />
       <Box p={4}>
         <PopularMoviesList movies={movies} />
       </Box>

@@ -19,7 +19,7 @@ const Router = () => {
             <Route path="/" element={<HomepageMovies />} />
             <Route path="/Home" index element={<HomepageMovies />} />
             <Route path="/Categories" element={<CategoriesMovies />} />
-            <Route path="/Details" element={<DetailsMovie />} />
+            <Route path="/Detail/:id" element={<DetailsMovie />} />
           </Routes>
         </Flex>
       </Flex>

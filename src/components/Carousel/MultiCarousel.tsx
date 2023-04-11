@@ -42,7 +42,7 @@ const MultiCarousel = ({ data }: MulticarouselProps) => {
               idMovie={movie.id}
               title={movie?.title}
               description={movie?.overview}
-              banner={movie?.posterPath}
+              banner={movie?.bannerPath}
               year={getYear(movie?.releaseDate)}
             />
           );

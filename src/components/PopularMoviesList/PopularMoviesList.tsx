@@ -17,6 +17,7 @@ const PopularMoviesList = ({ movies }: PopularMoviesListProps) => {
             title={movie.title}
             year={getYear(movie.releaseDate)}
             image={movie.posterPath}
+            voteAverage={movie.voteAverage}
           />
         );
       })}
