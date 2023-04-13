@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import getPopulars from "@/api/controllers/movies/getPopulars";
 import PopularMoviesList from "@/components/PopularMoviesList/PopularMoviesList";
 import { getRandomElements } from "@/utils/getRandomElements";
+import useNavigateToDetails from "@/hooks/movies/useNavigateToMovieDetails"
 
 const HomeMovies = () => {
   const [movies, setMovies] = useState<TApiData>([]);
+  const navigateToDetails = useNavigateToDetails();
 
   useEffect(() => {
     const getpopularMovies = async () => {
@@ -19,9 +21,9 @@ const HomeMovies = () => {
 
   return (
     <Box flex={1}>
-      <MultiCarousel data={getRandomElements(movies, 4)} />
+      <MultiCarousel data={getRandomElements(movies, 4)} onClickDetail={navigateToDetails}/>
       <Box p={4}>
-        <PopularMoviesList movies={movies} />
+        <PopularMoviesList movies={movies} onMovieClick={navigateToDetails} />
       </Box>
     </Box>
   );

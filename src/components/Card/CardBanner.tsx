@@ -11,7 +11,7 @@ import {
 import { TCardPopularsProps } from "./types";
 
 const CardPopulars = ({
-  idMovie,
+  onClickDetail,
   title,
   year,
   description,
@@ -28,7 +28,13 @@ const CardPopulars = ({
             <Text color={originalColors.white} noOfLines={2} mt={1}>
               {description}
             </Text>
-            <Button variant="solid" colorScheme="red" mt={2}>
+            <Button
+              variant="solid"
+              colorScheme="red"
+              mt={2}
+              _hover={{ borderColor: originalColors.white }}
+              onClick={onClickDetail}
+            >
               Details
             </Button>
           </Box>

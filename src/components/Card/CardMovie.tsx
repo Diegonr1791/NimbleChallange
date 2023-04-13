@@ -1,4 +1,5 @@
 import { StarIcon } from "@chakra-ui/icons";
+import { originalColors } from "@/theme/palette";
 import {
   AspectRatio,
   Card,
@@ -10,27 +11,50 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type CardMovieProps = {
   title: string;
   image: string;
   year: string;
   voteAverage?: number;
+  onClick?: () => void;
 };
 
-const CardMovie = ({ title, image, year, voteAverage }: CardMovieProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+const CardMovie = ({
+  title,
+  image,
+  year,
+  voteAverage,
+  onClick,
+}: CardMovieProps) => {
   return (
     <Card
       maxW="240px"
-      variant="elevated"
+      variant="outlined"
+      borderWidth="1px"
+      opacity={0.7}
+      borderColor="transparent"
+      backgroundColor="transparent"
+      color={originalColors.white}
       borderRadius={0}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(true)}
+      __css={{ padding: 0 }}
+      _hover={{
+        borderColor: originalColors.white,
+        borderWidth: 0.5,
+        cursor: "pointer",
+        opacity: 1,
+      }}
+      onClick={onClick}
     >
       <CardBody>
-        <AspectRatio maxW="240px" maxH="312px" ratio={2 / 3}>
+        <AspectRatio
+          maxW="240px"
+          maxH="312px"
+          ratio={2 / 3}
+          mb={1}
+          bgColor="red.300"
+        >
           <Image
             src={image}
             alt="Image"
@@ -39,8 +63,8 @@ const CardMovie = ({ title, image, year, voteAverage }: CardMovieProps) => {
             backgroundRepeat="no-repeat"
           />
         </AspectRatio>
+        <Divider />
         <Stack m={2} spacing="3">
-          <Divider />
           <Heading size="sm" noOfLines={1}>
             {title}
           </Heading>

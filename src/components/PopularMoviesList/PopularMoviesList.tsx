@@ -5,15 +5,20 @@ import { Grid, SimpleGrid } from "@chakra-ui/react";
 
 type PopularMoviesListProps = {
   movies: TApiData;
+  onMovieClick?: (id: number) => void;
 };
 
-const PopularMoviesList = ({ movies }: PopularMoviesListProps) => {
+const PopularMoviesList = ({
+  movies,
+  onMovieClick = () => {},
+}: PopularMoviesListProps) => {
   return (
     <SimpleGrid minChildWidth="180px" spacing="20px">
       {movies.map((movie, index) => {
         return (
           <CardMovie
             key={index}
+            onClick={() => onMovieClick(movie.id)}
             title={movie.title}
             year={getYear(movie.releaseDate)}
             image={movie.posterPath}

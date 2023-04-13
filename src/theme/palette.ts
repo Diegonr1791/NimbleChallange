@@ -7,4 +7,5 @@ export const originalColors = {
   white:"#FFFF",
   black:"#000",
   darkgrey:"#1c1c1c",
+  lightBlue: "#649AA6"
 };

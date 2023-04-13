@@ -12,7 +12,7 @@ const Navbar = () => {
       <Box>
         {itemsNavbar.map((item, index) => {
           return (
-            <Link key={index} p={3} href="/Home" color={originalColors.white}>
+            <Link key={index} p={3} href="/Home" color={originalColors.white} _hover={{textDecoration:"none"}}>
               {item}
             </Link>
           );

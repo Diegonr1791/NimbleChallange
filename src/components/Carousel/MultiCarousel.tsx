@@ -7,9 +7,10 @@ import { getYear } from "@/utils/date";
 
 type MulticarouselProps = {
   data: TApiData;
+  onClickDetail: (id: number) => void;
 };
 
-const MultiCarousel = ({ data }: MulticarouselProps) => {
+const MultiCarousel = ({ data, onClickDetail }: MulticarouselProps) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -39,7 +40,7 @@ const MultiCarousel = ({ data }: MulticarouselProps) => {
           return (
             <CardBanner
               key={index}
-              idMovie={movie.id}
+              onClickDetail={() => onClickDetail(movie.id)}
               title={movie?.title}
               description={movie?.overview}
               banner={movie?.bannerPath}
