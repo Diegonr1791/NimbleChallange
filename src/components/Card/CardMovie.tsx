@@ -11,29 +11,31 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { DEFAULT_MOVIE_IMAGE } from "@/constants/constants";
 
 type CardMovieProps = {
-  title: string;
-  image: string;
-  year: string;
+  title?: string;
+  image?: string;
+  year?: string;
   voteAverage?: number;
   onClick?: () => void;
+  isFull?: boolean;
 };
 
 const CardMovie = ({
   title,
-  image,
+  image = DEFAULT_MOVIE_IMAGE,
   year,
   voteAverage,
   onClick,
+  isFull,
 }: CardMovieProps) => {
   return (
     <Card
-      maxW="240px"
+      maxW={isFull ? "240px" : "auto"}
       variant="outlined"
       borderWidth="1px"
-      opacity={0.7}
+      opacity={isFull ? 0.7 : 1}
       borderColor="transparent"
       backgroundColor="transparent"
       color={originalColors.white}
@@ -42,17 +44,17 @@ const CardMovie = ({
       _hover={{
         borderColor: originalColors.white,
         borderWidth: 0.5,
-        cursor: "pointer",
+        cursor: isFull ? "pointer" : "",
         opacity: 1,
       }}
       onClick={onClick}
     >
       <CardBody>
         <AspectRatio
-          maxW="240px"
-          maxH="312px"
+          maxW={isFull ? "240px" : "auto"}
+          maxH={isFull ? "312px" : "auto"}
           ratio={2 / 3}
-          mb={1}
+          mb={isFull ? 1 : 0}
           bgColor="red.300"
         >
           <Image
@@ -63,19 +65,23 @@ const CardMovie = ({
             backgroundRepeat="no-repeat"
           />
         </AspectRatio>
-        <Divider />
-        <Stack m={2} spacing="3">
-          <Heading size="sm" noOfLines={1}>
-            {title}
-          </Heading>
-          <HStack>
-            <Text>{year}</Text>
-            <StarIcon color="yellow.400" boxSize={5} />
-            <Text mt="1" fontWeight="bold">
-              {voteAverage} / 10
-            </Text>
-          </HStack>
-        </Stack>
+        {isFull && (
+          <>
+            <Divider />
+            <Stack m={2} spacing="3">
+              <Heading size="sm" noOfLines={1}>
+                {title}
+              </Heading>
+              <HStack>
+                <Text>{year}</Text>
+                <StarIcon color="yellow.400" boxSize={5} />
+                <Text mt="1" fontWeight="bold">
+                  {voteAverage} / 10
+                </Text>
+              </HStack>
+            </Stack>
+          </>
+        )}
       </CardBody>
     </Card>
   );

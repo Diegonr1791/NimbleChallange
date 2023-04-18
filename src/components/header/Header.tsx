@@ -10,6 +10,7 @@ const Header = () => {
         <Heading color={originalColors.white}>NimbleMovies</Heading>
         <Navbar />
       </Flex>
+        <Divider color={originalColors.grey} opacity={0.1}  />
     </Grid>
   );
 };

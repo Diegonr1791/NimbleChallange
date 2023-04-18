@@ -5,9 +5,11 @@ import Header from "../components/header/Header";
 import { originalColors } from "@/theme/palette";
 import Loading from "@/components/Loading";
 
-const HomepageMovies = lazy(() => import("../pages/Home/HomeMovies"));
-const CategoriesMovies = lazy(() => import("../pages/Movies/CategoriesMovies"));
-const DetailsMovie = lazy(() => import("../pages/Movies/DetailsMovie"));
+const HomeMoviesPage = lazy(() => import("../pages/Home/HomePage"));
+const CategoriesMoviePage = lazy(
+  () => import("../pages/Movies/CategoriesPage")
+);
+const MovieDetailsPage = lazy(() => import("../pages/Movies/DetailsPage"));
 
 const Router = () => {
   return (
@@ -17,10 +19,10 @@ const Router = () => {
         <Flex flex="1">
           <Suspense fallback={<Loading />}>
             <Routes>
-              <Route path="/" element={<HomepageMovies />} />
-              <Route path="/home" index element={<HomepageMovies />} />
-              <Route path="/categories" element={<CategoriesMovies />} />
-              <Route path="/detail/:id" element={<DetailsMovie />} />
+              <Route path="/" element={<HomeMoviesPage />} />
+              <Route path="/home" index element={<HomeMoviesPage />} />
+              <Route path="/categories" element={<CategoriesMoviePage />} />
+              <Route path="/detail/:id" element={<MovieDetailsPage />} />
             </Routes>
           </Suspense>
         </Flex>

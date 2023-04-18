@@ -23,6 +23,7 @@ const PopularMoviesList = ({
             year={getYear(movie.releaseDate)}
             image={movie.posterPath}
             voteAverage={movie.voteAverage}
+            isFull
           />
         );
       })}

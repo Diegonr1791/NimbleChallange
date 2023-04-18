@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Link } from "@chakra-ui/react";
 import { itemsNavbar } from "./items";
 import { originalColors } from "@/theme/palette";
 import SearchInput from "../Imput/SearchImput/SearchInput";
