@@ -44,7 +44,7 @@ const CardMovie = ({
       _hover={{
         borderColor: originalColors.white,
         borderWidth: 0.5,
-        cursor: isFull ? "pointer" : "",
+        cursor: "pointer",
         opacity: 1,
       }}
       onClick={onClick}

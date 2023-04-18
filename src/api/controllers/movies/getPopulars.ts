@@ -1,5 +1,5 @@
 import { API_MOVIE, THEMOVIEDB_APIKEY } from "@/constants/constants";
-import { formatPopularsMovies } from "./adapters/formatPopularsMovies";
+import { formatMoviesForList } from "./adapters/formatMoviesForList";
 
 const popularMoviesApi = `${API_MOVIE}/3/movie/popular?api_key=${THEMOVIEDB_APIKEY}`;
 const headers = {
@@ -9,7 +9,7 @@ const getPopulars = async () => {
   const response = await fetch(popularMoviesApi, { headers });
   if (response.ok) {
     const data = await response.json();
-    const formatedData = formatPopularsMovies(data);
+    const formatedData = formatMoviesForList(data);
 
     return formatedData;
   }

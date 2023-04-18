@@ -1,5 +1,5 @@
 import { TApiData } from "@/api/controllers/movies/adapters/formatPopularsMovies";
-import CardMovie from "../Card/CardMovie";
+import CardMovie from "../../Card/CardMovie";
 import { getYear } from "@/utils/date";
 import { Grid, SimpleGrid } from "@chakra-ui/react";
 

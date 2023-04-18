@@ -1,11 +1,11 @@
-import { TApiData } from "@/api/controllers/movies/adapters/formatPopularsMovies";
 import MultiCarousel from "@/components/Carousel/MultiCarousel";
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import getPopulars from "@/api/controllers/movies/getPopulars";
-import PopularMoviesList from "@/components/PopularMoviesList/PopularMoviesList";
+import PopularMoviesList from "@/components/Movies/PopularMoviesList/PopularMoviesList";
 import { getRandomElements } from "@/utils/getRandomElements";
 import useNavigateToDetails from "@/hooks/movies/useNavigateToMovieDetails";
+import { TApiData } from "@/api/controllers/movies/adapters/formatMoviesForList";
 
 const HomeMovies = () => {
   const [movies, setMovies] = useState<TApiData>([]);

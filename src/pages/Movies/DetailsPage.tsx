@@ -1,17 +1,20 @@
 import { MovieDetail } from "@/api/controllers/movies/adapters/formatMovieDetail";
 import { getMovieDetails } from "@/api/controllers/movies/getMovieDetails";
 import CardMovie from "@/components/Card/CardMovie";
-import DetailsMovie from "@/components/DetailsMovie/DetailsMovie";
 import Loading from "@/components/Loading";
-import { originalColors } from "@/theme/palette";
+import DetailsMovie from "@/components/Movies/DetailsMovie/DetailsMovie";
+import SimilarMoviesList from "@/components/Movies/SimilarMoviesList/SimilarMoviesList";
+import useNavigateToMovieDetails from "@/hooks/movies/useNavigateToMovieDetails";
 import { getYear } from "@/utils/date";
-import { Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 
 const DetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const [detailMovie, setDetailMovie] = useState<MovieDetail>();
+  const navigateToDetails = useNavigateToMovieDetails();
+
   useEffect(() => {
     if (id) {
       const getDetailMovie = async (id: string) => {
@@ -20,7 +23,7 @@ const DetailsPage = () => {
       };
       getDetailMovie(id);
     }
-  }, []);
+  }, [id]);
 
   if (!id) return <Navigate to="/" />;
   if (!detailMovie) return <Loading />;
@@ -30,7 +33,6 @@ const DetailsPage = () => {
       <Flex
         w="1300px"
         maxW="1300px"
-        bgColor="gray.300"
         margin="0px auto"
         flexDir={{ base: "column", sm: "row", md: "row", xl: "row" }}
         justifyContent={{
@@ -52,15 +54,15 @@ const DetailsPage = () => {
         flexWrap="wrap"
       >
         <Grid
-          w={{ base: "400px", sm: "30%", md: "30%", xl: "30%" }}
-          bgColor="red.200"
+          w={{ base: "300px", sm: "30%", md: "30%", xl: "32%" }}
+          h={{ xl: "70%" }}
         >
           <CardMovie image={detailMovie?.image} />
         </Grid>
         <Flex
-          maxW={{ base: "100%", sm: "50%", lg: "50%", xl: "45%" }}
+          w={{ base: "100%" }}
+          maxW={{ base: "100%", sm: "50%", lg: "50%", xl: "40%" }}
           pl={{ base: 3 }}
-          bgColor="red.400"
         >
           <DetailsMovie
             title={detailMovie.title}
@@ -74,16 +76,10 @@ const DetailsPage = () => {
           />
         </Flex>
         <Flex
-          w={{ base: "100%", xl: "20%" }}
-          maxW={{ base: "80%", xl: "20%" }}
-          bgColor="red.600"
-          alignItems="center"
-          flexDirection="column"
+          w={{ base: "100%", sm: "100%", md: "100%", lg: "100%", xl: "15%" }}
+          maxW={{ base: "100%", sm: "100%", md: "100%", lg: "100%", xl: "15%" }}
         >
-          <Heading fontSize={20} color={originalColors.white} pb={4}>
-            Overview
-          </Heading>
-          <Text>{detailMovie.overview}</Text>
+          <SimilarMoviesList id={Number(id)} onMovieClick={navigateToDetails} />
         </Flex>
       </Flex>
     </Flex>

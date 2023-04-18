@@ -14,7 +14,12 @@ const MovieDetailsPage = lazy(() => import("../pages/Movies/DetailsPage"));
 const Router = () => {
   return (
     <BrowserRouter basename="">
-      <Flex flexDir="column" flex="1" bgColor={originalColors.darkgrey}>
+      <Flex
+        flexDir="column"
+        flex="1"
+        minH="100vh"
+        bgColor={originalColors.darkgrey}
+      >
         <Header />
         <Flex flex="1">
           <Suspense fallback={<Loading />}>
