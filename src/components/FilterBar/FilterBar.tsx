@@ -52,7 +52,12 @@ const FilterBar = () => {
           "1900-1949",
         ]}
       />
-      <Flex alignItems="flex-end" justifyContent={{ base: "center" }} mb={2}>
+      <Flex
+        alignItems="flex-start"
+        pt={{ base: 42, sm: 0, md: 0, lg: 42, xl: 42 }}
+        justifyContent={{ base: "center" }}
+        mb={2}
+      >
         <Button variant="solid" color={originalColors.violet}>
           Search
         </Button>
