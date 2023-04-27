@@ -8,6 +8,9 @@ import {
 } from "@/api/controllers/movies/adapters/formatMoviesForList";
 import { getSimilarMovies } from "@/api/controllers/movies/getSimilars";
 import List from "@/components/List/List";
+import { useQuery } from "@tanstack/react-query";
+import ErrorApiView from "@/components/ErrorApiView/ErrorApiView";
+import { FETCH_SIMILAR_MOVIES } from "@/api/constantsApi";
 
 interface SimilarMoviesListProps {
   id: number;
@@ -18,15 +21,12 @@ const SimilarMoviesList = ({
   id,
   onMovieClick = () => {},
 }: SimilarMoviesListProps) => {
-  const [similarMovies, setSimilarMovies] = useState<TApiData>([]);
-
-  useEffect(() => {
-    const getSimilarsMovies = async () => {
-      const data = await getSimilarMovies(id);
-      setSimilarMovies(data);
-    };
-    getSimilarsMovies();
-  }, []);
+  const {
+    data: similarMovies,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery([FETCH_SIMILAR_MOVIES, { id }], getSimilarMovies);
 
   const renderItem = useCallback(
     (movie: TMovieData) => {
@@ -41,7 +41,8 @@ const SimilarMoviesList = ({
     [onMovieClick]
   );
 
-  if (!similarMovies) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (error || !similarMovies) return <ErrorApiView onRetry={refetch} />;
 
   return (
     <Stack w="100%" textAlign="center">

@@ -39,6 +39,5 @@ export const formatMoviesForList = (data: any) => {
     };
     return formatedData;
   });
-  console.log({ formatedMovies });
   return formatedMovies;
 };

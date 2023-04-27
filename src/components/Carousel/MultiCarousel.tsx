@@ -2,15 +2,20 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardBanner from "@/components/Card/CardBanner";
 import { Grid } from "@chakra-ui/react";
-import { TApiData } from "@/api/controllers/movies/adapters/formatPopularsMovies";
 import { getYear } from "@/utils/date";
+import { useQuery } from "@tanstack/react-query";
+import { FETCH_POPULAR_MOVIES } from "@/api/constantsApi";
+import getPopulars from "@/api/controllers/movies/getPopulars";
+import Loading from "../Loading";
+import { getRandomElements } from "@/utils/getRandomElements";
 
 type MulticarouselProps = {
-  data: TApiData;
   onClickDetail: (id: number) => void;
 };
 
-const MultiCarousel = ({ data, onClickDetail }: MulticarouselProps) => {
+const MultiCarousel = ({ onClickDetail }: MulticarouselProps) => {
+  const { data, isLoading } = useQuery([FETCH_POPULAR_MOVIES], getPopulars);
+  const movies = data && getRandomElements(data, 4);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -26,6 +31,8 @@ const MultiCarousel = ({ data, onClickDetail }: MulticarouselProps) => {
     },
   };
 
+  if (isLoading) return <Loading />;
+
   return (
     <Grid flex={1}>
       <Carousel
@@ -36,18 +43,19 @@ const MultiCarousel = ({ data, onClickDetail }: MulticarouselProps) => {
         infinite
         autoPlay
       >
-        {data.map((movie, index: number) => {
-          return (
-            <CardBanner
-              key={index}
-              onClickDetail={() => onClickDetail(movie.id)}
-              title={movie?.title}
-              description={movie?.overview}
-              banner={movie?.bannerPath}
-              year={getYear(movie?.releaseDate)}
-            />
-          );
-        })}
+        {movies &&
+          movies.map((movie, index: number) => {
+            return (
+              <CardBanner
+                key={index}
+                onClickDetail={() => onClickDetail(movie.id)}
+                title={movie?.title}
+                description={movie?.overview}
+                banner={movie?.bannerPath}
+                year={getYear(movie?.releaseDate)}
+              />
+            );
+          })}
       </Carousel>
     </Grid>
   );

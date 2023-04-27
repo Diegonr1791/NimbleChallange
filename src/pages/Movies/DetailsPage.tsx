@@ -1,32 +1,31 @@
+import { FETCH_DETAIL_MOVIE } from "@/api/constantsApi";
 import { MovieDetail } from "@/api/controllers/movies/adapters/formatMovieDetail";
 import { getMovieDetails } from "@/api/controllers/movies/getMovieDetails";
 import CardMovie from "@/components/Card/CardMovie";
+import ErrorApiView from "@/components/ErrorApiView/ErrorApiView";
 import Loading from "@/components/Loading";
 import DetailsMovie from "@/components/Movies/DetailsMovie/DetailsMovie";
 import SimilarMoviesList from "@/components/Movies/SimilarMoviesList/SimilarMoviesList";
 import useNavigateToMovieDetails from "@/hooks/movies/useNavigateToMovieDetails";
 import { getYear } from "@/utils/date";
 import { Flex, Grid } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Navigate, useParams } from "react-router-dom";
 
 const DetailsPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [detailMovie, setDetailMovie] = useState<MovieDetail>();
-  const navigateToDetails = useNavigateToMovieDetails();
 
-  useEffect(() => {
-    if (id) {
-      const getDetailMovie = async (id: string) => {
-        const detail = await getMovieDetails(id);
-        setDetailMovie(detail);
-      };
-      getDetailMovie(id);
-    }
-  }, [id]);
+  const navigateToDetails = useNavigateToMovieDetails();
+  const {
+    data: detailMovie,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery([FETCH_DETAIL_MOVIE, { id }], getMovieDetails);
 
   if (!id) return <Navigate to="/" />;
-  if (!detailMovie) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (error || !detailMovie) return <ErrorApiView onRetry={refetch} />;
 
   return (
     <Flex flex={1}>
@@ -79,7 +78,10 @@ const DetailsPage = () => {
           w={{ base: "100%", sm: "100%", md: "100%", lg: "100%", xl: "15%" }}
           maxW={{ base: "100%", sm: "100%", md: "100%", lg: "100%", xl: "15%" }}
         >
-          <SimilarMoviesList id={Number(id)} onMovieClick={navigateToDetails} />
+          <SimilarMoviesList
+            id={detailMovie.id}
+            onMovieClick={navigateToDetails}
+          />
         </Flex>
       </Flex>
     </Flex>

@@ -1,32 +1,19 @@
 import MultiCarousel from "@/components/Carousel/MultiCarousel";
 import { Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import getPopulars from "@/api/controllers/movies/getPopulars";
 import PopularMoviesList from "@/components/Movies/PopularMoviesList/PopularMoviesList";
-import { getRandomElements } from "@/utils/getRandomElements";
 import useNavigateToDetails from "@/hooks/movies/useNavigateToMovieDetails";
-import { TApiData } from "@/api/controllers/movies/adapters/formatMoviesForList";
+import { useQuery } from "@tanstack/react-query";
+import { FETCH_POPULAR_MOVIES } from "@/api/constantsApi";
 
 const HomeMovies = () => {
-  const [movies, setMovies] = useState<TApiData>([]);
   const navigateToDetails = useNavigateToDetails();
-
-  useEffect(() => {
-    const getpopularMovies = async () => {
-      const popularMovies = await getPopulars();
-      setMovies(popularMovies);
-    };
-    getpopularMovies();
-  }, []);
 
   return (
     <Box flex={1}>
-      <MultiCarousel
-        data={getRandomElements(movies, 4)}
-        onClickDetail={navigateToDetails}
-      />
+      <MultiCarousel onClickDetail={navigateToDetails} />
       <Box p={4}>
-        <PopularMoviesList movies={movies} onMovieClick={navigateToDetails} />
+        <PopularMoviesList onMovieClick={navigateToDetails} />
       </Box>
     </Box>
   );
