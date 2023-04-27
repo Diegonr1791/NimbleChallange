@@ -3,6 +3,7 @@ export const originalColors = {
   lightviolet: "#C3CFFF",
   darkviolet: "#150032",
   grey: "#8D8A94",
+  greyItems: "#282828",
   greybackground: "#AFAFAF",
   white: "#FFFF",
   black: "#000",

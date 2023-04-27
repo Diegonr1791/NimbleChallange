@@ -1,5 +1,5 @@
 import { Box, Flex, Link } from "@chakra-ui/react";
-import { itemsNavbar } from "./items";
+import { pages } from "./pageItems";
 import { originalColors } from "@/theme/palette";
 import SearchInput from "../Imput/SearchImput/SearchInput";
 
@@ -10,10 +10,17 @@ const Navbar = () => {
   return (
     <Flex flex={1} alignItems="center" pl={5}>
       <Box>
-        {itemsNavbar.map((item, index) => {
+        {pages.map((page, index) => {
+          const isActive = location.pathname === page.path;
           return (
-            <Link key={index} p={3} href="/Home" color={originalColors.white} _hover={{textDecoration:"none"}}>
-              {item}
+            <Link
+              key={index}
+              p={3}
+              href={page.path}
+              color={originalColors.white}
+              _hover={{ textDecoration: "none" }}
+            >
+              {page.name}
             </Link>
           );
         })}
