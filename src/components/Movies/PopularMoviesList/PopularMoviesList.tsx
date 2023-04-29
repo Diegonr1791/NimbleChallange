@@ -1,6 +1,6 @@
 import CardMovie from "../../Card/CardMovie";
 import { getYear } from "@/utils/date";
-import { Grid, SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { FETCH_POPULAR_MOVIES } from "@/api/constantsApi";
 import getPopulars from "@/api/controllers/movies/getPopulars";

@@ -1,6 +1,12 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import FilterItemList from "../FilterItemList/FilterItemList";
 import { originalColors } from "@/theme/palette";
+import { FETCH_GENRE_LIST_KEY } from "@/api/constantsApi";
+import { getMoviesGenres } from "@/api/controllers/movies/getMoviesGenres";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../Loading";
+import GenreFilterList from "../Filters/GenreFilterList";
+import RatingFilterList from "../Filters/RatingFilterList";
 
 const FilterBar = () => {
   return (
@@ -23,11 +29,13 @@ const FilterBar = () => {
       pt={5}
       w={{ base: "auto", sm: "35%", lg: "auto", xl: "auto" }}
     >
-      <FilterItemList
-        filterName="Genre"
-        list={["Aventura", "Terror", "Accion"]}
-      />
-      <FilterItemList
+      <FilterItemList filterName="Genre">
+        <GenreFilterList />
+      </FilterItemList>
+      <FilterItemList filterName="Rating">
+        <RatingFilterList />
+      </FilterItemList>
+      {/*    <FilterItemList
         filterName="Rating"
         list={["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]}
       />
@@ -51,7 +59,7 @@ const FilterBar = () => {
           "1950-1979",
           "1900-1949",
         ]}
-      />
+      /> */}
       <Flex
         alignItems="flex-start"
         pt={{ base: 42, sm: 0, md: 0, lg: 42, xl: 42 }}

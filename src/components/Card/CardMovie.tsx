@@ -72,7 +72,7 @@ const CardMovie = ({
               <Heading size="sm" noOfLines={1}>
                 {title}
               </Heading>
-              <HStack>
+              <HStack justifyContent="center">
                 <Text>{year}</Text>
                 <StarIcon color="yellow.400" boxSize={5} />
                 <Text mt="1" fontWeight="bold">

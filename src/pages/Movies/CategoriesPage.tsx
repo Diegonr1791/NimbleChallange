@@ -1,7 +1,10 @@
 import FilterBar from "@/components/FilterBar/FilterBar";
-import { Flex, Grid, Text } from "@chakra-ui/react";
+import MoviesList from "@/components/Movies/MoviesList/MoviesList";
+import useNavigateToMovieDetails from "@/hooks/movies/useNavigateToMovieDetails";
+import { Box, Flex } from "@chakra-ui/react";
 
 const CategoriesPage = () => {
+  const navigateToDetails = useNavigateToMovieDetails();
   return (
     <Flex
       flexDirection={{
@@ -14,9 +17,9 @@ const CategoriesPage = () => {
       flex={1}
     >
       <FilterBar />
-      <Flex bgColor="grey" h="100%" w="100%">
-        <Text color="white">Movies</Text>
-      </Flex>
+      <Box w="100%" mt={4}>
+        <MoviesList onMovieClick={navigateToDetails} />
+      </Box>
     </Flex>
   );
 };
