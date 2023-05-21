@@ -6,11 +6,9 @@ const Header = () => {
   return (
     <Grid>
       <Flex flex={1} py={2}>
-        <Box w="20" />
-        <Heading color={originalColors.white}>NimbleMovies</Heading>
         <Navbar />
       </Flex>
-        <Divider color={originalColors.grey} opacity={0.1}  />
+      <Divider color={originalColors.grey} opacity={0.1} />
     </Grid>
   );
 };

@@ -1,22 +1,34 @@
 import { Button, Flex } from "@chakra-ui/react";
 import FilterItemList from "../FilterItemList/FilterItemList";
 import { originalColors } from "@/theme/palette";
-import { FETCH_GENRE_LIST_KEY } from "@/api/constantsApi";
-import { getMoviesGenres } from "@/api/controllers/movies/getMoviesGenres";
-import { useQuery } from "@tanstack/react-query";
-import Loading from "../Loading";
 import GenreFilterList from "../Filters/GenreFilterList";
 import RatingFilterList from "../Filters/RatingFilterList";
+import YearInput from "../YearInput/YearInput";
+import { TMovieListFilters } from "@/types";
+import { TFiltersChangeValue } from "@/hooks/useFilters";
+import { log } from "console";
 
-const FilterBar = () => {
+interface FilterBarProps {
+  activeFilters: TMovieListFilters;
+  addUniqueValueToFilter: ({ name, value }: TFiltersChangeValue) => void;
+  addMultipleValueToFilter: ({ name, value }: TFiltersChangeValue) => void;
+  clearFilters: () => void;
+}
+
+const FilterBar = ({
+  addMultipleValueToFilter,
+  addUniqueValueToFilter,
+  clearFilters,
+  activeFilters,
+}: FilterBarProps) => {
+  const { with_genres = "", primary_release_year = "" } = activeFilters;
+  const activeRating = activeFilters["vote_average.lte"];
+
   return (
     <Flex
       flexDirection={{
         base: "row",
         sm: "column",
-        md: "column",
-        lg: "row",
-        xl: "row",
       }}
       flexWrap="wrap"
       justifyContent={{
@@ -27,48 +39,54 @@ const FilterBar = () => {
         xl: "center",
       }}
       pt={5}
-      w={{ base: "auto", sm: "35%", lg: "auto", xl: "auto" }}
+      pb={{ base: 3, sm: 0 }}
+      w={{ base: "auto", sm: "50%", lg: "auto", xl: "auto" }}
     >
-      <FilterItemList filterName="Genre">
-        <GenreFilterList />
-      </FilterItemList>
-      <FilterItemList filterName="Rating">
-        <RatingFilterList />
-      </FilterItemList>
-      {/*    <FilterItemList
-        filterName="Rating"
-        list={["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]}
-      />
-      <FilterItemList
-        filterName="Quality"
-        list={["480p", "720p", "1080p", "2160p", "3D", "4K"]}
-      />
-      <FilterItemList
-        filterName="Year"
-        list={[
-          "2023",
-          "2022",
-          "2021",
-          "2020",
-          "2019",
-          "2015-2018",
-          "2010-2014",
-          "2000-2009",
-          "1990-1999",
-          "1980-1989",
-          "1950-1979",
-          "1900-1949",
-        ]}
-      /> */}
+      <Flex justifyContent="center">
+        <GenreFilterList
+          activeGenres={with_genres}
+          handleGenreClick={(id: number) => {
+            addMultipleValueToFilter({ name: "with_genres", value: id });
+          }}
+        />
+      </Flex>
       <Flex
-        alignItems="flex-start"
-        pt={{ base: 42, sm: 0, md: 0, lg: 42, xl: 42 }}
-        justifyContent={{ base: "center" }}
-        mb={2}
+        justifyContent="center"
+        alignItems="center"
+        flexDirection={{ base: "row", sm: "column", lg: "row" }}
+        pr={{ base: 0, md: 2, lg: 0 }}
+        pl={{ base: 2, sm: 0 }}
+        pt={2}
+        w="100%"
+        gap={{ base: 3, sm: 0, md: 3 }}
       >
-        <Button variant="solid" color={originalColors.violet}>
-          Search
-        </Button>
+        <FilterItemList filterName="Rating">
+          <RatingFilterList
+            defaultValue={activeRating}
+            onConfirm={(rating) =>
+              addUniqueValueToFilter({
+                name: "vote_average.lte",
+                value: rating,
+              })
+            }
+          />
+        </FilterItemList>
+        <FilterItemList filterName="Year">
+          <YearInput
+            defaultValue={primary_release_year}
+            onConfirm={(year) =>
+              addUniqueValueToFilter({
+                name: "primary_release_year",
+                value: year,
+              })
+            }
+          />
+        </FilterItemList>
+        <Flex pt={{ base: 6, sm: 0, lg: 6, xl: 6 }} justifyContent="center">
+          <Button variant="solid" color={originalColors.violet}>
+            Search
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );

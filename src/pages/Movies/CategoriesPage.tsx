@@ -1,10 +1,19 @@
 import FilterBar from "@/components/FilterBar/FilterBar";
 import MoviesList from "@/components/Movies/MoviesList/MoviesList";
 import useNavigateToMovieDetails from "@/hooks/movies/useNavigateToMovieDetails";
+import useFilters from "@/hooks/useFilters";
 import { Box, Flex } from "@chakra-ui/react";
 
 const CategoriesPage = () => {
   const navigateToDetails = useNavigateToMovieDetails();
+  const {
+    filters,
+    filterCount,
+    addMultipleValueToFilter,
+    addUniqueValueToFilter,
+    clearFilters,
+  } = useFilters();
+
   return (
     <Flex
       flexDirection={{
@@ -16,9 +25,14 @@ const CategoriesPage = () => {
       }}
       flex={1}
     >
-      <FilterBar />
+      <FilterBar
+        activeFilters={filters}
+        clearFilters={clearFilters}
+        addMultipleValueToFilter={addMultipleValueToFilter}
+        addUniqueValueToFilter={addUniqueValueToFilter}
+      />
       <Box w="100%" mt={4}>
-        <MoviesList onMovieClick={navigateToDetails} />
+        <MoviesList filters={filters} onMovieClick={navigateToDetails} />
       </Box>
     </Flex>
   );

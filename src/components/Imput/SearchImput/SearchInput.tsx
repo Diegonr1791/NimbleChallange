@@ -20,7 +20,7 @@ const SearchInput = ({
   inputProps = {
     placeholder: "Search",
     backgroundColor: "white",
-    borderRadius:"3px"
+    borderRadius: "3px",
   },
 }: SearchInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +30,7 @@ const SearchInput = ({
   };
 
   return (
-    <HStack {...containerProps}>
+    <HStack {...containerProps} w="100%">
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"

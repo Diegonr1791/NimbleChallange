@@ -8,79 +8,71 @@ import {
   AccordionPanel,
   Box,
   Flex,
+  HStack,
+  Slider,
+  SliderFilledTrack,
+  SliderMark,
+  SliderThumb,
+  SliderTrack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { RATING_LIST } from "./utils";
+import { useRef, useState } from "react";
+import { RATING_VALUES } from "./utils";
 
-type List = {
-  id: number;
-  name: string;
+type RatingFilterListProps = {
+  defaultValue?: number;
+  onConfirm: (value: number) => void;
 };
 
-const RatingFilterList = () => {
-  const [nameItem, setNameItem] = useState("Select");
-  const handleClick = (item: List) => {
-    setNameItem(item.name);
-    //setear filtro
+const labelStyles = {
+  mt: "2",
+  fontSize: "md",
+  ml: "-1",
+};
+
+const RatingFilterList = ({
+  defaultValue = 11,
+  onConfirm = () => {},
+}: RatingFilterListProps) => {
+  const sliderRef = useRef<HTMLInputElement>(null);
+
+  const onConfirmPress = () => {
+    console.log(Number(sliderRef.current?.value));
+    if (!Number(sliderRef.current?.value)) return;
+
+    onConfirm(Number(sliderRef.current?.value));
   };
+
   return (
-    <Accordion allowToggle>
-      <AccordionItem
-        borderStyle="none"
-        bgColor={originalColors.greyItems}
-        textDecoration="none"
-        borderRadius={5}
+    <HStack>
+      <Slider
+        defaultValue={defaultValue}
+        min={0}
+        max={10}
+        step={1}
+        ml={2}
+        ref={sliderRef}
+        onChange={onConfirmPress}
       >
-        <AccordionButton color={originalColors.white}>
-          <Box
-            as="span"
-            flex="1"
-            textAlign="left"
-            color={originalColors.white}
+        {RATING_VALUES.map((rating, index) => (
+          <SliderMark
+            key={index}
+            value={rating}
+            color="white"
             opacity={0.7}
-            fontWeight="normal"
-            minW="100px"
+            {...labelStyles}
+            mr={3}
           >
-            <Flex alignItems="center">
-              {nameItem}
-              {nameItem != "Select" && (
-                <StarIcon color="yellow.400" boxSize={3} />
-              )}
-            </Flex>
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel
-          py={0}
-          bgColor={originalColors.greyItems}
-          color={originalColors.white}
-          borderColor={originalColors.white}
-          borderWidth={0.7}
-          opacity={0.7}
-          px={0}
-          maxH="200px"
-          overflow="auto"
-          scrollBehavior="smooth"
-        >
-          {RATING_LIST.map((rating, index) => {
-            return (
-              <Box
-                key={index}
-                onClick={() => handleClick(rating)}
-                px={1}
-                _hover={{ backgroundColor: originalColors.lightblue }}
-              >
-                <Flex alignItems="center">
-                  <Text pr={1}>{rating.name}</Text>
-                  <StarIcon color="yellow.400" boxSize={3} />
-                </Flex>
-              </Box>
-            );
-          }).reverse()}
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+            {rating}
+          </SliderMark>
+        ))}
+        <SliderTrack bg="white">
+          <Box bgColor={originalColors.violet} />
+          <SliderFilledTrack bg={originalColors.violet} />
+        </SliderTrack>
+        <SliderThumb boxSize={4} />
+      </Slider>
+    </HStack>
   );
 };
 

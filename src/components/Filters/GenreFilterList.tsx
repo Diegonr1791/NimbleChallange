@@ -8,78 +8,47 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  HStack,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Loading from "../Loading";
+import Chip from "../Chip/Chip";
+import { CheckIcon } from "@chakra-ui/icons";
 
-type List = {
-  id: number;
-  name: string;
-};
+export interface GenreListProps {
+  activeGenres: string;
+  handleGenreClick: (id: number) => void;
+}
 
-const GenreFilterList = () => {
-  const [nameItem, setNameItem] = useState("Select");
-  const handleClick = (item: List) => {
-    setNameItem(item.name);
-    //setear filtro
-  };
+const GenreFilterList = ({
+  activeGenres = "",
+  handleGenreClick = () => {},
+}: GenreListProps) => {
   const { data: genres, isLoading } = useQuery(
     [FETCH_GENRE_LIST_KEY],
     getMoviesGenres
   );
 
-  if (!genres) return <Loading />;
+  if (!genres || isLoading) return <Loading />;
 
   return (
-    <Accordion allowToggle>
-      <AccordionItem
-        borderStyle="none"
-        bgColor={originalColors.greyItems}
-        textDecoration="none"
-        borderRadius={5}
-      >
-        <AccordionButton color={originalColors.white}>
-          <Box
-            as="span"
-            flex="1"
-            textAlign="left"
-            color={originalColors.white}
-            opacity={0.7}
-            fontWeight="normal"
-            minW="100px"
-          >
-            {nameItem}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel
-          py={0}
-          bgColor={originalColors.greyItems}
-          color={originalColors.white}
-          borderColor={originalColors.white}
-          borderWidth={0.7}
-          opacity={0.7}
-          px={0}
-          maxH="200px"
-          overflow="auto"
-          scrollBehavior="smooth"
-        >
-          {genres.map((genre, index) => {
-            return (
-              <Box
-                key={index}
-                onClick={() => handleClick(genre)}
-                px={1}
-                _hover={{ backgroundColor: originalColors.lightblue }}
-              >
-                {genre.name}
-              </Box>
-            );
-          })}
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+    <HStack flexWrap="wrap" gap={2} justifyContent="center">
+      {genres.map((genre, index) => {
+        const isActive = activeGenres.split(",").includes(genre.id.toString());
+
+        return (
+          <Chip
+            key={index}
+            item={genre.name}
+            icon={CheckIcon}
+            size="lg"
+            isActive={isActive}
+            onClick={() => handleGenreClick(genre.id)}
+          />
+        );
+      })}
+    </HStack>
   );
 };
 
