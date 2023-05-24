@@ -62,9 +62,6 @@ const YearInput = ({
           </Text>
         )}
       </VStack>
-      {/*      <Button size="md" onClick={handleChange} isDisabled={isInvalid}>
-        Search
-      </Button> */}
     </Flex>
   );
 };

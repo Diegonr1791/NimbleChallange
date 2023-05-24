@@ -12,7 +12,7 @@ type TMoviesFilters = {
 };
 
 export const getDiscoverMovies = async ({
-  pageParam = 2,
+  pageParam = 1,
   queryKey,
 }: {
   pageParam?: number;
@@ -36,7 +36,12 @@ export const getDiscoverMovies = async ({
 
     const data = await response.json();
     const movies = formatMoviesForList(data);
-    return { nextPage: data.page + 1, results: movies };
+    const hasNextPage = data.page < data.total_pages;
+
+    return {
+      nextPage: hasNextPage ? data.page + 1 : undefined,
+      results: movies,
+    };
   } catch (error) {
     throw error;
   }

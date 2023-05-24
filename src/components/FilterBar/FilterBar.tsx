@@ -83,8 +83,12 @@ const FilterBar = ({
           />
         </FilterItemList>
         <Flex pt={{ base: 6, sm: 0, lg: 6, xl: 6 }} justifyContent="center">
-          <Button variant="solid" color={originalColors.violet}>
-            Search
+          <Button
+            variant="solid"
+            color={originalColors.violet}
+            onClick={clearFilters}
+          >
+            Clear
           </Button>
         </Flex>
       </Flex>

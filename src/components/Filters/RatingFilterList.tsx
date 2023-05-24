@@ -31,13 +31,12 @@ const labelStyles = {
 };
 
 const RatingFilterList = ({
-  defaultValue = 11,
+  defaultValue = 10,
   onConfirm = () => {},
 }: RatingFilterListProps) => {
   const sliderRef = useRef<HTMLInputElement>(null);
 
   const onConfirmPress = () => {
-    console.log(Number(sliderRef.current?.value));
     if (!Number(sliderRef.current?.value)) return;
 
     onConfirm(Number(sliderRef.current?.value));
@@ -52,7 +51,7 @@ const RatingFilterList = ({
         step={1}
         ml={2}
         ref={sliderRef}
-        onChange={onConfirmPress}
+        onChangeEnd={onConfirmPress}
       >
         {RATING_VALUES.map((rating, index) => (
           <SliderMark

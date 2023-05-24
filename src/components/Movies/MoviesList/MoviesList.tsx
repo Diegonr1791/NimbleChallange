@@ -1,13 +1,12 @@
 import { FETCH_ALL_MOVIES } from "@/api/constantsApi";
-import { TMovieData } from "@/api/controllers/movies/adapters/formatMoviesForList";
 import { getDiscoverMovies } from "@/api/controllers/movies/getDiscoverMovies";
 import CardMovie from "@/components/Card/CardMovie";
 import Loading from "@/components/Loading";
 import { TMovieListFilters } from "@/types";
 import { getYear } from "@/utils/date";
-import { Center, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Center, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroller";
 
 type MoviesListProps = {
   filters: TMovieListFilters;
@@ -20,13 +19,9 @@ const MoviesList = ({ filters, onMovieClick = () => {} }: MoviesListProps) => {
     isLoading,
     hasNextPage = false,
     fetchNextPage,
-  } = useInfiniteQuery(
-    [FETCH_ALL_MOVIES, { ...filters, page: filters.page || 1 }],
-    getDiscoverMovies,
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-    }
-  );
+  } = useInfiniteQuery([FETCH_ALL_MOVIES, filters], getDiscoverMovies, {
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+  });
   const movies = data?.pages?.flatMap((page) => page.results) || [];
 
   if (isLoading) return <Loading />;
@@ -36,14 +31,14 @@ const MoviesList = ({ filters, onMovieClick = () => {} }: MoviesListProps) => {
         <Heading color="white">No items found</Heading>
       </Center>
     );
-  console.log({ filters });
-
   return (
     <InfiniteScroll
-      dataLength={movies?.length}
+      pageStart={1}
       hasMore={hasNextPage}
       loader={<Spinner />}
-      next={() => fetchNextPage()}
+      loadMore={() => {
+        fetchNextPage();
+      }}
       style={{ textAlign: "center", color: "white" }}
     >
       <SimpleGrid
@@ -71,6 +66,11 @@ const MoviesList = ({ filters, onMovieClick = () => {} }: MoviesListProps) => {
           );
         })}
       </SimpleGrid>
+      {!hasNextPage && (
+        <Center w="100%" my={4}>
+          <Text>No more results</Text>
+        </Center>
+      )}
     </InfiniteScroll>
   );
 };
