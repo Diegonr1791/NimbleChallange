@@ -1,15 +1,14 @@
 import { Box, Divider, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
+import { originalColors } from "@/theme/palette";
 
 const Header = () => {
   return (
-    <Grid >
-      <Flex flex={1}>
-        <Box w="20" />
-        <Heading>NimbleMovies</Heading>
-        <Navbar/>
+    <Grid>
+      <Flex flex={1} py={2}>
+        <Navbar />
       </Flex>
-      <Divider />
+      <Divider color={originalColors.grey} opacity={0.1} />
     </Grid>
   );
 };

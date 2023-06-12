@@ -1,25 +1,35 @@
 import { Flex } from "@chakra-ui/react";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "../components/header/Header";
-import Navbar from "../components/Navbar/Navbar";
+import { originalColors } from "@/theme/palette";
+import Loading from "@/components/Loading";
 
-const HomepageMovies = lazy(() => import("../pages/Home/HomeMovies"));
-const CategoriesMovies = lazy(() => import("../pages/Movies/CategoriesMovies"));
-const DetailsMovie = lazy(() => import("../pages/Movies/DetailsMovie"));
+const HomeMoviesPage = lazy(() => import("../pages/Home/HomePage"));
+const CategoriesMoviePage = lazy(
+  () => import("../pages/Movies/CategoriesPage")
+);
+const MovieDetailsPage = lazy(() => import("../pages/Movies/DetailsPage"));
 
 const Router = () => {
   return (
     <BrowserRouter basename="">
-      <Flex flexDir="column" flex="1">
+      <Flex
+        flexDir="column"
+        flex="1"
+        minH="100vh"
+        bgColor={originalColors.darkgrey}
+      >
         <Header />
         <Flex flex="1">
-          <Routes>
-            <Route path="/" element={<HomepageMovies />} />
-            <Route path="/Home" index element={<HomepageMovies />} />
-            <Route path="/Categories" element={<CategoriesMovies />} />
-            <Route path="/Details" element={<DetailsMovie />} />
-          </Routes>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<HomeMoviesPage />} />
+              <Route path="/home" index element={<HomeMoviesPage />} />
+              <Route path="/categories" element={<CategoriesMoviePage />} />
+              <Route path="/detail/:id" element={<MovieDetailsPage />} />
+            </Routes>
+          </Suspense>
         </Flex>
       </Flex>
     </BrowserRouter>
