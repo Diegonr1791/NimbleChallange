@@ -2,7 +2,6 @@ import { QueryKey } from "@tanstack/react-query";
 import { formatMoviesForList } from "./adapters/formatMoviesForList";
 import { last } from "lodash";
 import { API_MOVIE, THEMOVIEDB_APIKEY } from "@/constants/constants";
-import { TMovieListFilters } from "@/types";
 
 const DEFAULT_MOVIES_ERROR_MESSAGE = "Error fetching discovery movies";
 

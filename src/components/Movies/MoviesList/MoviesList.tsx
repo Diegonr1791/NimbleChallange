@@ -35,11 +35,12 @@ const MoviesList = ({ filters, onMovieClick = () => {} }: MoviesListProps) => {
     <InfiniteScroll
       pageStart={1}
       hasMore={hasNextPage}
-      loader={<Spinner />}
+      loader={<Spinner key={0} />}
       loadMore={() => {
         fetchNextPage();
       }}
       style={{ textAlign: "center", color: "white" }}
+      key={0}
     >
       <SimpleGrid
         minChildWidth={{

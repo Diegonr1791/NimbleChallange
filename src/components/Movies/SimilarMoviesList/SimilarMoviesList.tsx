@@ -45,7 +45,7 @@ const SimilarMoviesList = ({
   if (error || !similarMovies) return <ErrorApiView onRetry={refetch} />;
 
   return (
-    <Stack w="100%" textAlign="center">
+    <Stack w="100%" textAlign="center" flexWrap="wrap">
       <Text color="white" fontWeight="bold" fontSize={{ base: "25" }}>
         Similar Movies
       </Text>

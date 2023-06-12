@@ -82,7 +82,7 @@ const DetailsMovie = ({
         </VStack>
       )}
       {!!overview && (
-        <VStack alignItems="flex-start" pt={5}>
+        <VStack alignItems="flex-start" pt={5} w={{base:"50%", sm:"auto"}}>
           <ItemText>Overview</ItemText>
           <Text color={originalColors.white}>{overview}</Text>
         </VStack>

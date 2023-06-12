@@ -1,12 +1,9 @@
 import { Box, Flex, Heading, Link } from "@chakra-ui/react";
 import { pages } from "./pageItems";
 import { originalColors } from "@/theme/palette";
-import SearchInput from "../Imput/SearchImput/SearchInput";
+import SearchInput from "../Input/SearchInput/SearchInput";
 
 const Navbar = () => {
-  const onChangeSearch = (search: string) => {
-    console.log("search");
-  };
   return (
     <Flex flex={1} alignItems="center" flexWrap="wrap">
       <Flex>
@@ -35,7 +32,7 @@ const Navbar = () => {
         alignItems="center"
         w={{ base: "100%", sm: "auto" }}
       >
-        <SearchInput setValue={onChangeSearch} />
+        <SearchInput />
       </Flex>
     </Flex>
   );

@@ -33,7 +33,7 @@ const DetailsPage = () => {
         w="1300px"
         maxW="1300px"
         margin="0px auto"
-        flexDir={{ base: "column", sm: "row", md: "row", xl: "row" }}
+        flexDir={{ base: "row" }}
         justifyContent={{
           base: "unset",
           sm: "center",
