@@ -35,6 +35,7 @@ const CardMovie = ({
       maxW={isFull ? "240px" : "auto"}
       variant="outlined"
       borderWidth="1px"
+      w="100%"
       opacity={isFull ? 0.7 : 1}
       borderColor="transparent"
       backgroundColor="transparent"

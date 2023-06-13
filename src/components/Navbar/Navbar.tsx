@@ -18,7 +18,7 @@ const Navbar = () => {
               key={index}
               p={3}
               href={page.path}
-              color={originalColors.white}
+              color={ isActive ? originalColors.violet : originalColors.white}
               _hover={{ textDecoration: "none" }}
             >
               {page.name}

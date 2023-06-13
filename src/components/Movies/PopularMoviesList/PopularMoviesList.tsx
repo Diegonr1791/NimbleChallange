@@ -1,6 +1,6 @@
 import CardMovie from "../../Card/CardMovie";
 import { getYear } from "@/utils/date";
-import { SimpleGrid } from "@chakra-ui/react";
+import { Grid, SimpleGrid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { FETCH_POPULAR_MOVIES } from "@/api/constantsApi";
 import getPopulars from "@/api/controllers/movies/getPopulars";
@@ -23,7 +23,13 @@ const PopularMoviesList = ({
   if (!!error) return <ErrorApiView onRetry={refetch} />;
 
   return (
-    <SimpleGrid minChildWidth="180px" spacing="20px">
+    <Grid
+      gap="20px"
+      alignItems={{ base: "center", sm: "normal" }}
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+    >
       {data &&
         data.map((movie, index) => {
           return (
@@ -38,7 +44,7 @@ const PopularMoviesList = ({
             />
           );
         })}
-    </SimpleGrid>
+    </Grid>
   );
 };
 

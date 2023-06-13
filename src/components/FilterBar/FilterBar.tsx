@@ -6,7 +6,6 @@ import RatingFilterList from "../Filters/RatingFilterList";
 import YearInput from "../YearInput/YearInput";
 import { TMovieListFilters } from "@/types";
 import { TFiltersChangeValue } from "@/hooks/useFilters";
-import { log } from "console";
 
 interface FilterBarProps {
   activeFilters: TMovieListFilters;
